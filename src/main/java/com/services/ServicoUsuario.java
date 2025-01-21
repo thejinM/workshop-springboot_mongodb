@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.domain.Usuario;
+import com.dto.UsuarioDTO;
 import com.repository.RepositorioUsuario;
 import com.services.exception.ExceptionObjetoNaoEcontrado;
 
@@ -25,5 +26,15 @@ public class ServicoUsuario
     {
         return repositorioUsuario.findById(id).orElseThrow(() -> new ExceptionObjetoNaoEcontrado("Objeto não encontrado!"));
     }
+  }
+
+  public Usuario inserir (Usuario obj)
+  {
+    return repositorioUsuario.insert(obj);  
+  }
+
+  public Usuario deUsuario(UsuarioDTO objDTO)
+  {
+    return new Usuario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail());
   }
 }
