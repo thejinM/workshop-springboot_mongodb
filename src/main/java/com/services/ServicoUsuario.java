@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.domain.Usuario;
 import com.repository.RepositorioUsuario;
+import com.services.exception.ExceptionObjetoNaoEcontrado;
 
 @Service
 public class ServicoUsuario 
@@ -17,5 +18,12 @@ public class ServicoUsuario
   public List<Usuario> findAll()
   {
     return repositorioUsuario.findAll();
+  }
+
+  public Usuario findById(String id)
+  {
+    {
+        return repositorioUsuario.findById(id).orElseThrow(() -> new ExceptionObjetoNaoEcontrado("Objeto não encontrado!"));
+    }
   }
 }
