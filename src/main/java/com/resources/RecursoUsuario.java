@@ -1,6 +1,7 @@
 package com.resources;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.domain.Usuario;
+import com.dto.UsuarioDTO;
 import com.services.ServicoUsuario;
 
 @RestController
@@ -19,9 +21,10 @@ public class RecursoUsuario
   private ServicoUsuario servicoUsuario;
 
   @GetMapping
-  public ResponseEntity<List<Usuario>> findAll()
+  public ResponseEntity<List<UsuarioDTO>> findAll()
   {
     List<Usuario> lista = servicoUsuario.findAll();
-    return ResponseEntity.ok().body(lista);
+    List<UsuarioDTO> listaDTO = lista.stream().map(x -> new UsuarioDTO(x)).collect(Collectors.toList());
+    return ResponseEntity.ok().body(listaDTO);
   }
 }
