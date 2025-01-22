@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import com.domain.Post;
 import com.domain.Usuario;
 import com.dto.AutorDTO;
+import com.dto.ComentarioDTO;
 import com.repository.RepositorioPost;
 import com.repository.RepositorioUsuario;
 
@@ -40,6 +41,10 @@ public class Instanciacao implements CommandLineRunner
     repositorioUsuario.saveAll(Arrays.asList(barbara, jean, laudelina, maegle, ester, luiz, sergio, angela));
 
     Post p1 = new Post(null, Instant.parse("2025-01-21T17:00:00Z"), "imagem.jpg - <3", "Como eu amo a Bárbara!!!", new AutorDTO(jean));
+
+    ComentarioDTO c1 = new ComentarioDTO("Eu também te amo meu amor <3", Instant.parse("2025-01-21T18:00:00Z"), new AutorDTO(barbara));
+
+    p1.getComentarios().addAll(Arrays.asList(c1));
 
     repositorioPost.saveAll(Arrays.asList(p1));
 
