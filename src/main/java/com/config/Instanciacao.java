@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.domain.Post;
 import com.domain.Usuario;
+import com.dto.AutorDTO;
 import com.repository.RepositorioPost;
 import com.repository.RepositorioUsuario;
 
@@ -36,9 +37,13 @@ public class Instanciacao implements CommandLineRunner
     Usuario sergio = new Usuario(null, "Sérgio Luís Mallmann", "sergio.mallmann@gmail.com");
     Usuario angela = new Usuario(null, "Ângela Rejani Schuck Mallmann", "angela.mallmann@gmail.com");
 
-    Post p1 = new Post(null, Instant.parse("2025-01-21T17:00:00Z"), "imagem.jpg - <3", "Como eu amo a Bárbara!!!", jean);
-
     repositorioUsuario.saveAll(Arrays.asList(barbara, jean, laudelina, maegle, ester, luiz, sergio, angela));
+
+    Post p1 = new Post(null, Instant.parse("2025-01-21T17:00:00Z"), "imagem.jpg - <3", "Como eu amo a Bárbara!!!", new AutorDTO(jean));
+
     repositorioPost.saveAll(Arrays.asList(p1));
+
+    jean.getPosts().addAll(Arrays.asList(p1));
+    repositorioUsuario.save(jean);
   } 
 }
