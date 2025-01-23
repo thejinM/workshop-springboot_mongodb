@@ -22,14 +22,4 @@ public class ExceptionManipuladorRecurso
     ExceptionErroPadrao erroPadrao = new ExceptionErroPadrao(Instant.now(), status.value(), erro, e.getMessage(), request.getRequestURI());
     return ResponseEntity.status(status).body(erroPadrao);
   }
-
-/*
-  @ExceptionHandler(ExceptionBancoDados.class)
-  public ResponseEntity<ErroPadrao> bancoDados(ExceptionBancoDados e, HttpServletRequest request)
-  {
-    String erro = "Erro no Banco de Dados!";
-    HttpStatus status = HttpStatus.BAD_REQUEST;
-    ErroPadrao erroPadrao = new ErroPadrao(Instant.now(), status.value(), erro, e.getMessage(), request.getRequestURI());
-    return ResponseEntity.status(status).body(erroPadrao);
-  }*/
 }
